@@ -1,7 +1,5 @@
 import { Router } from "express";
-import { User } from "../models/user";
-import { Post } from "../models/post";
-
+import { Post, User } from "../models";
 const router = Router();
 
 // Create a new user
