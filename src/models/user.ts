@@ -8,7 +8,6 @@ import {
   HasMany,
 } from "sequelize-typescript";
 import { Optional } from "sequelize";
-import sequelize from "../config/db";
 import { Post } from "./post";
 
 interface UserAttributes {
@@ -36,4 +35,3 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
   posts!: Post[]; // One-to-many relationship with Post
 }
 
-sequelize.addModels([User, Post]);
