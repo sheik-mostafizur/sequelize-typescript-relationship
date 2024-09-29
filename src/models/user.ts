@@ -5,9 +5,11 @@ import {
   PrimaryKey,
   AutoIncrement,
   DataType,
+  HasMany,
 } from "sequelize-typescript";
 import { Optional } from "sequelize";
 import sequelize from "../config/db";
+import { Post } from "./post";
 
 interface UserAttributes {
   id: number;
@@ -29,6 +31,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 
   @Column(DataType.STRING)
   email!: string;
+
+  @HasMany(() => Post)
+  posts!: Post[]; // One-to-many relationship with Post
 }
 
-sequelize.addModels([User]);
+sequelize.addModels([User, Post]);
