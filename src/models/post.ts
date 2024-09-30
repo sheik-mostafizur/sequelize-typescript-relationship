@@ -19,7 +19,14 @@ interface PostAttributes {
 
 interface PostAttributesCreationAttributes
   extends Optional<PostAttributes, "id"> {}
-@Table
+
+@Table({
+  tableName: "posts",
+  timestamps: true,
+  underscored: true,
+  createdAt: "created_at",
+  updatedAt: "updated_at",
+})
 export class Post extends Model<PostAttributesCreationAttributes> {
   @PrimaryKey
   @AutoIncrement

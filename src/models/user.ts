@@ -18,7 +18,13 @@ interface UserAttributes {
 
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
 
-@Table
+@Table({
+  tableName: "users",
+  timestamps: true,
+  underscored: true,
+  createdAt: "created_at",
+  updatedAt: "updated_at",
+})
 export class User extends Model<UserAttributes, UserCreationAttributes> {
   @PrimaryKey
   @AutoIncrement
@@ -34,4 +40,3 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
   @HasMany(() => Post)
   posts!: Post[]; // One-to-many relationship with Post
 }
-
