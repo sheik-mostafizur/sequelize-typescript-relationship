@@ -20,9 +20,13 @@ app.use("/api", [getAllRoutes, userRoutes]);
 const startServer = async () => {
   const PORT = 4000;
   try {
-    await sequelize.sync({ force: false }); // Sync database
+    const isForce = false // enable force and seed db
 
-    // await dbSeed()
+    await sequelize.sync({ force: isForce }); // Sync database
+
+    if(isForce){
+      await dbSeed()
+    }
 
     app.listen(PORT, () => {
       console.log("Server is running on http://localhost:" + PORT);
