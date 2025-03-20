@@ -1,29 +1,19 @@
 import { Post, User, Role, Permission, Todo, UserRole } from "./models";
 
 export const dbSeed = async () => {
-  const admin = await User.create({
-    name: "MD Admin",
-    email: "admin@gmail.com",
-  });
-  const user1 = await User.create({
-    name: "MD Rohim",
-    email: "romni@gmail.com",
-  });
+  // Create Users
+  const admin = await User.create({ name: "MD Admin", email: "admin@gmail.com" });
+  const user1 = await User.create({ name: "MD Rohim", email: "romni@gmail.com" });
+  const user2 = await User.create({ name: "John Doe", email: "john.doe@gmail.com" });
+  const user3 = await User.create({ name: "Jane Smith", email: "jane.smith@gmail.com" });
 
-  const user2 = await User.create({
-    name: "John Doe",
-    email: "john.doe@gmail.com",
-  });
-
-  const user3 = await User.create({
-    name: "Jane Smith",
-    email: "jane.smith@gmail.com",
-  });
-
-  await Post.create({ title: "U1 Post 1", userId: user1.id });
-  await Post.create({ title: "U1 Post 2", userId: user1.id });
-  await Post.create({ title: "U2 Post 1", userId: user2.id });
-  await Post.create({ title: "U3 Post 1", userId: user3.id });
+  // Create Posts
+  await Post.bulkCreate([
+    { title: "U1 Post 1", userId: user1.id },
+    { title: "U1 Post 2", userId: user1.id },
+    { title: "U2 Post 1", userId: user2.id },
+    { title: "U3 Post 1", userId: user3.id }
+  ]);
 
   const adminRole = await Role.create({ name: "admin" });
   const userRole = await Role.create({ name: "user" });
