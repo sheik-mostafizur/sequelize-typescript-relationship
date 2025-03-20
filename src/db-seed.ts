@@ -1,6 +1,10 @@
-import { Post, User, Role, Permission, Todo } from "./models";
+import { Post, User, Role, Permission, Todo, UserRole } from "./models";
 
 export const dbSeed = async () => {
+  const admin = await User.create({
+    name: "MD Admin",
+    email: "admin@gmail.com",
+  });
   const user1 = await User.create({
     name: "MD Rohim",
     email: "romni@gmail.com",
@@ -30,6 +34,8 @@ export const dbSeed = async () => {
   const [postCreate, postRead, todoCreate, todoRead] = await Permission.findAll();
   await adminRole.$add("permissions", [postCreate, postRead, todoCreate, todoRead]);
   await userRole.$add("permissions", [postRead, todoRead]);
+
+  await UserRole.create({ user_id: admin.id, role_id: adminRole.id })
 
   const todos = [
     { task: "Buy groceries", completed: false, userId: user1.id },

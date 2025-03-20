@@ -6,9 +6,12 @@ import {
   AutoIncrement,
   DataType,
   HasMany,
+  BelongsToMany,
 } from "sequelize-typescript";
 import { Optional } from "sequelize";
 import { Post } from "./post";
+import Role from "./role";
+import UserRole from "./user-roles";
 
 
 interface UserAttributes {
@@ -41,4 +44,8 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 
   @HasMany(() => Post)
   posts!: Post[]; // One-to-many relationship with Post
+
+
+  @BelongsToMany(() => Role, ()=> UserRole)
+  roles!: Role[];
 }

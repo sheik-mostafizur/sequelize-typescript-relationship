@@ -2,16 +2,24 @@ import express from "express";
 import sequelize from "./config/db";
 import getAllRoutes from "./routes/get-routes";
 import userRoutes from "./routes/user-routes";
-import { User } from "./models/user";
-import { Post } from "./models/post";
+import postRoutes from "./routes/post-routes";
+import todoRoutes from "./routes/todo-routes";
 import { dbSeed } from "./db-seed";
+import { User } from "./models";
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", [getAllRoutes, userRoutes]);
+app.use("/api", [getAllRoutes, userRoutes, postRoutes, todoRoutes]);
 
+declare global {
+	namespace Express {
+		interface Request {
+			user?: User;
+		}
+	}
+}
 
 
 // createData();

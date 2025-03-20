@@ -5,10 +5,13 @@ import {
   PrimaryKey,
   AutoIncrement,
   DataType,
-  BelongsToMany
+  BelongsToMany,
+  HasMany
 } from "sequelize-typescript";
 import Permission from "./permission";
 import RolePermission from "./role-permission";
+import UserRole from "./user-roles";
+import { User } from "./user";
 
 @Table({ tableName: "roles", 
   timestamps: true,
@@ -24,13 +27,17 @@ export class Role extends Model {
   @Column(DataType.STRING)
   name!: string;
 
-  // don't need to create model for role_permissions
-  // @BelongsToMany(() => Permission, "role_permissions", "role_id", "permission_id")
-  // permissions!: Permission[];
-
   // alternative
   @BelongsToMany(() => Permission, () => RolePermission)
   permissions!: Permission[];
+
+
+  // Many-to-many relationship between Role and User, using UserRole as the intermediate table
+  @HasMany(() => UserRole)
+  userRoles!: UserRole[]; // One-to-many relationship with UserRole (as a bridge)
+
+  @BelongsToMany(() => User, ()=> UserRole)
+  users!: User[];
 }
 
 export default Role;
