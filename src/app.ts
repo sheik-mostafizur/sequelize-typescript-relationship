@@ -2,6 +2,7 @@ import express from "express";
 import sequelize from "./config/db";
 import getAllRoutes from "./routes/get-routes";
 import userRoutes from "./routes/user-routes";
+import tempRoutes from "./routes/temp-routes";
 import { User } from "./models/user";
 import { Post } from "./models/post";
 const app = express();
@@ -9,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", [getAllRoutes, userRoutes]);
+app.use("/api", [getAllRoutes, userRoutes, tempRoutes]);
 
 const createData = async () => {
   await User.create({
@@ -32,19 +33,19 @@ const createData = async () => {
   // await User.create({
   //   name: "jamel",
   //   email: "jamel@gmail.com",
-  //   address: {
-  //     Country: "Bangladesh",
-  //     StateDivision: "Khulna Division",
-  //     CountyDistrict: "Chuadanga District",
+  // address: {
+  //   Country: "Bangladesh",
+  //   StateDivision: "Khulna Division",
+  //   CountyDistrict: "Chuadanga District",
+  //   CityTown: "Alamda",
+  //   PostalCode: "12345",
+  //   StreetHouseNumber: "12/A",
+  //   present: {
   //     CityTown: "Alamda",
-  //     PostalCode: "12345",
-  //     StreetHouseNumber: "12/A",
-  //     present: {
-  //       CityTown: "Alamda",
-  //       PostalCode: "54321",
-  //       StreetHouseNumber: "14/B",
-  //     },
+  //     PostalCode: "54321",
+  //     StreetHouseNumber: "14/B",
   //   },
+  // },
   // });
   // await User.create({
   //   name: "jasmin",

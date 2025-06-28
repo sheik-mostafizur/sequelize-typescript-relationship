@@ -1,0 +1,38 @@
+### GET user
+GET http://localhost:4000/api/users
+
+### POST user
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@gmail.com",
+    "address": {
+      "Country": "Bangladesh",
+      "StateDivision": "Khulna Division",
+      "CountyDistrict": "Chuadanga District",
+      "CityTown": "Alamda",
+      "PostalCode": "12345",
+      "StreetHouseNumber": "12/A",
+      "present": {
+        "CityTown": "Alamda",
+        "PostalCode": "54321",
+        "StreetHouseNumber": "14/B"
+      }
+    }
+}
+
+
+
+### TEMP create
+POST http://localhost:4000/api/temp
+Content-Type: application/json
+
+{
+  "title": "Sample Title with FK",
+  "userId": 1
+}
+
+### TEMP get
+GET http://localhost:4000/api/temp
